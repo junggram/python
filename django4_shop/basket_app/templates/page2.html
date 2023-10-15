@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=function(){
+	document.querySelector("#btnOk").onclick=function(){
+		frm.submit();
+	}
+}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td>
+			<img src="/static/images/pic2.png" style="width:10%">
+		</td>
+		<td>
+		<pre>
+체자드 캐주얼 할인
+원가 1090원
+할인가 190원
+주문 시 적용되는 혜택 : 걸어서 찾아가요
+		</pre>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="cart" name="frm" method="post">{%csrf_token%}
+			<input type="hidden" name="name" value="최자드피부자켓"/>
+			<input type="hidden" name="price" value="9"/>
+			<input type="button" id="btnOk" value="장바구니에 담기"/>
+			<input type="button" value="홈으로" onclick="history.back()"/>
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

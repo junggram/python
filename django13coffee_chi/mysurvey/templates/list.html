@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>커피 전문점에 대한 소비자 인식조사 결과</h2>
+<a href="http://127.0.0.1/">홈으로</a><br />
+{%if ctab %}
+{{ctab|safe}} <br />
+결과 : {{result | safe}}
+통계량 : {{count}} <br />
+{%endif%}
+<img src="/static/images/coffee.png" width = '400' alt='거피거피'/>
+<br /> <br />
+<a href="/coffee/survey">설문조사 화면으로</a>
+</body>
+</html>

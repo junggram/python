@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("btnOk").onclick=confirmFunc;
+	document.querySelector("#btnShow").onclick=function(){
+		//alert('b');
+		document.location.href="/guest/select"; // history.back();
+	}
+}
+
+function confirmFunc(){
+	//alert('a');
+	if (frm.title.value === ""){ // javascript 에서 === 는 데이터 뿐만 아니라 type도 비교해줌
+		frm.title.placeholder="제목을 입력하세요"
+		return false;
+	}
+	frm.submit();
+}
+</script>
+</head>
+<body>
+** 방명록 글 쓰기 **</p>
+<form action="/guest/insertok" method="post" name="frm"> {%csrf_token%}
+<!-- onsubmit="return false" -->
+<table>
+	<tr>
+		<td>제목:</td>
+		<td><input type="text" name="title" size="48"/></td>
+	</tr>
+	<tr>
+		<td>내용:</td>
+		<td>
+			<textarea name="content" cols="50" rows="5"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align:center">
+			<input type="button" id="btnOk" value="등록하기"/>
+			<input type="button" id="btnShow" value="목록보기"/>
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

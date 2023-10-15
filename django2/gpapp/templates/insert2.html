@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+자료입력
+<form action="/gptest/insert2" method="post">{% csrf_token%} <!-- post방식에선 csrf토큰태그를 꼭 남기자 (해킹의 위험을 줄인다) settings.py에서 csrf토큰 관련 코드를 지우면 안된다 정신 빠진거임 -->
+
+이름: <input type="text" name="name"/>
+<input type="submit" value="확인"/>
+</form>
+</body>
+</html>

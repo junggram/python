@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function func(arg){
+   //alert(arg);
+   let result = confirm("정말 삭제할까요?");
+   if(result){
+	   document.getElementById(arg).submit();
+   }
+}
+</script>
+</head>
+<body>
+   <h1>상품 정보</h1>
+   <div style="width:80%; text-align:right;margin-bottom:5px; ">
+      <a href="/sangpum/insert">상품추가</a>
+   </div>
+   <table border="1" style="width:80%;">
+      <tr style="background-color:red; color:white;">
+         <th>코드</th><th>상품명</th><th>수량</th><th>단가</th><th>기타</th>
+      </tr>
+      {% if sangpums %}
+      {% for s in sangpums %}
+      <tr>
+         <td>{{s.code}}</td> <!-- select문의 결과를 출력할 때는 tuple 이므로 s.0,... 사용 -->
+         <td>{{s.sang}}</td>
+         <td>{{s.su}}</td>
+         <td>{{s.dan}}</td>
+         <td>
+            <a href="/sangpum/update?code={{s.code}}">수정</a><!--  -->
+            |<!-- 
+            <a href="/sangpum/delete?code={{s.code}}">삭제</a>
+             -->
+             <form action="/sangpum/delete" name="frm" method="get" style="display:inline"
+             	id="{{s.code}}">
+                <input type="hidden" name="code" value="{{s.code}}" />
+                <a href="javascript:void(0); onclick=func({{s.code}})">삭제</a>
+             </form>
+         </td>
+      </tr>
+      {% endfor %}
+      <!-- 페이징 처리 -->
+      <tr>
+         <td colspan="5">
+         {% if sangpums.paginator.num_pages > 1 %}<!-- 전체 페이지의 수 1보다 커야해 -->
+            <div>
+               {% if sangpums.has_previous %}
+                  <a href="/sangpum/list?page={{sangpums.previous_page_number}}">&laquo;이전</a>
+               {% endif %} <!-- sangpum은 요청명 sangpums는 객체 -->
+               
+                {% if sangpums.has_next %} <!-- 다음 페이지가 있다면 -->
+                        <a href="/sangpum/list?page={{sangpums.next_page_number}}">다음&raquo;</a>
+               {% endif %}
+               (페이지: {{sangpums.number}} / {{sangpums.paginator.num_pages}})
+               <hr />
+               {% for p in allpage %}
+                  {% if p > 0 %}
+                     {% if p == sangpums.number %} <!-- 현재 페이지는 링크에서 제외 -->
+                        [{{p}}]
+                     {% else %}
+                        <a href="/sangpum/list?page={{p}}">[{{p}}]</a>
+                     {% endif %}
+                  {% endif %}
+               {% endfor %}
+            </div>
+            
+         {% endif %}
+         </td>
+      </tr>
+      
+      
+      {% else %}
+      <tr>
+         <td colspan="6"> 자료 없음</td>
+      </tr>
+      {% endif %}
+   </table>
+</body>
+</html>

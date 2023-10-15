@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.dataframe{
+		text-align: center;
+	}
+</style>
+</head>
+
+<body>
+<h2>직원 자료</h2>
+{% if datas %}
+{{datas|safe}} <!-- | safe 로 DataFrame을 parsing -->
+{% endif %}
+<hr>
+직급별 연봉합:<br />
+과장 : {{jik_group.sum.과장}}<br />
+대리 : {{jik_group.sum.대리}}<br />
+사원 : {{jik_group.sum.사원}}<br />
+<hr />
+{{jik_group_detail|safe}}
+<hr />
+직급별 성별 인원수 : <br />
+{{ctab|safe}}
+<hr />
+<img src="/static/images/jik.png"/>
+</body>
+</html>
